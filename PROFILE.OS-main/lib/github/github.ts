@@ -1,63 +1,42 @@
+import { SITE_CONFIG } from "@/lib/constants";
 import { GitHubRepository, GitHubUserProfile } from "@/types/github";
-
-const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "FANGUYSS";
 
 export interface GitHubTelemetry {
   available: boolean;
+  configured: boolean;
   profile: GitHubUserProfile | null;
   repos: GitHubRepository[];
   totalStars: number;
 }
 
-/**
- * Fetches public GitHub profile and top repositories with graceful fallback.
- */
+/** GitHub is optional; an unset username never falls back to another person. */
 export async function fetchGitHubTelemetry(
-  username: string = GITHUB_USERNAME
+  username: string = SITE_CONFIG.githubUsername
 ): Promise<GitHubTelemetry> {
+  const empty = { available: false, configured: Boolean(username), profile: null, repos: [], totalStars: 0 };
+  if (!username) return empty;
+
   try {
-    const headers: HeadersInit = {
-      Accept: "application/vnd.github+json",
-    };
-
-    if (process.env.GITHUB_TOKEN) {
-      headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-    }
-
+    const headers: HeadersInit = { Accept: "application/vnd.github+json" };
+    if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+    const base = `https://api.github.com/users/${encodeURIComponent(username)}`;
     const [profileRes, reposRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${username}`, {
-        headers,
-        next: { revalidate: 3600 },
-      }),
-      fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`, {
-        headers,
-        next: { revalidate: 3600 },
-      }),
+      fetch(base, { headers, next: { revalidate: 3600 } }),
+      fetch(`${base}/repos?sort=updated&per_page=6`, { headers, next: { revalidate: 3600 } }),
     ]);
-
-    if (!profileRes.ok) {
-      return { available: false, profile: null, repos: [], totalStars: 0 };
-    }
+    if (!profileRes.ok) return empty;
 
     const profile = (await profileRes.json()) as GitHubUserProfile;
-    const repos = reposRes.ok ? ((await reposRes.json()) as GitHubRepository[]) : [];
-
-    const totalStars = Array.isArray(repos)
-      ? repos.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0)
-      : 0;
-
+    const repos: unknown = reposRes.ok ? await reposRes.json() : [];
+    const publicRepos = Array.isArray(repos) ? (repos as GitHubRepository[]) : [];
     return {
       available: true,
+      configured: true,
       profile,
-      repos: Array.isArray(repos) ? repos : [],
-      totalStars,
+      repos: publicRepos,
+      totalStars: publicRepos.reduce((total, repo) => total + (repo.stargazers_count || 0), 0),
     };
   } catch {
-    return {
-      available: false,
-      profile: null,
-      repos: [],
-      totalStars: 0,
-    };
+    return empty;
   }
 }

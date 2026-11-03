@@ -1,4 +1,6 @@
-# PROFILE.OS image assets
+# Profile image
 
-Place the future FANGUYSS profile image in `profile/`.
-The current UI intentionally works without a profile image, so nothing breaks until one is added.
+The canonical avatar is `../avatar.png` (public URL: `/avatar.png`).
+Replace that PNG with your own square image, keeping its filename.
+The hero, Discord fallback, browser icon, and social previews all use it.
+Rebuild/redeploy after replacement. The old template profile image is no longer used.

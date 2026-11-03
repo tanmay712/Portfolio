@@ -45,7 +45,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const currentTrack = MUSIC_LIBRARY[trackIndex] || MUSIC_LIBRARY[0];
+  const playAfterLoadRef = useRef(false);
 
   // Hydrate preferences on mount
   useEffect(() => {
@@ -91,24 +91,29 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Sync track source
+  // Sync only when the selected track changes; play/pause is handled by controls.
+  const currentTrack = MUSIC_LIBRARY[trackIndex] || MUSIC_LIBRARY[0];
+  const trackAudio = currentTrack.audio;
+  const trackId = currentTrack.id;
+  const trackDuration = currentTrack.duration;
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     setError(null);
-    audio.src = currentTrack.audio;
-    setDuration(currentTrack.duration);
+    audio.src = trackAudio;
+    setDuration(trackDuration);
     setCurrentTime(0);
-    saveMusicPreference("TRACK_ID", currentTrack.id);
+    saveMusicPreference("TRACK_ID", trackId);
 
-    if (isPlaying) {
+    if (playAfterLoadRef.current) {
+      playAfterLoadRef.current = false;
       audio.play().catch(() => {
-        setError("Unable to load track. Check MP3 path in /public/music/.");
+        setError("Unable to load track. Check the audio path in data/music.ts.");
         setIsPlaying(false);
       });
     }
-  }, [trackIndex]);
+  }, [trackAudio, trackId, trackDuration]);
 
   // Handle track ended
   useEffect(() => {
@@ -118,7 +123,13 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     const handleEnded = () => {
       const nextIdx = getNextTrackIndex(trackIndex, MUSIC_LIBRARY.length, shuffle, repeat);
       if (nextIdx !== null) {
-        setTrackIndex(nextIdx);
+        if (nextIdx === trackIndex) {
+          audio.currentTime = 0;
+          audio.play().catch(() => setIsPlaying(false));
+        } else {
+          playAfterLoadRef.current = true;
+          setTrackIndex(nextIdx);
+        }
       } else {
         setIsPlaying(false);
       }
@@ -178,6 +189,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
       return true;
     }
 
+    playAfterLoadRef.current = true;
     setTrackIndex(foundIdx);
     setIsPlaying(true);
     return true;
@@ -195,6 +207,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
       resume();
       return;
     }
+    playAfterLoadRef.current = isPlaying;
     setTrackIndex(nextIdx);
   };
 
@@ -203,6 +216,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
       audioRef.current.currentTime = 0;
       setCurrentTime(0);
     } else {
+      playAfterLoadRef.current = isPlaying;
       setTrackIndex(getPreviousTrackIndex(trackIndex, MUSIC_LIBRARY.length));
     }
   };

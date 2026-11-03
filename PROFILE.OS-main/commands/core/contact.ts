@@ -4,7 +4,7 @@ import { PROFILE_DATA } from "@/data/profile";
 
 export const contactCommand: CommandDefinition = {
   command: "contact",
-  description: "Display direct email contact card",
+  description: "Display the support email contact card",
   category: "core",
   execute: () => ({
     output: React.createElement(
@@ -24,7 +24,7 @@ export const contactCommand: CommandDefinition = {
         React.createElement(
           "div",
           null,
-          React.createElement("div", { className: "text-zinc-500 text-xs" }, "EMAIL"),
+          React.createElement("div", { className: "text-zinc-500 text-xs" }, "SUPPORT EMAIL"),
           React.createElement(
             "a",
             {

@@ -4,49 +4,27 @@ export interface SkillGroup {
   isExploring?: boolean;
 }
 
+/** Technologies actually used by this site, not unverified personal skills. */
 export const SKILLS_DATA: SkillGroup[] = [
   {
-    category: "Languages",
-    items: ["JavaScript", "TypeScript", "Python", "HTML", "CSS"],
+    category: "Interface",
+    items: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
   },
   {
-    category: "Web",
-    items: ["React", "Next.js", "Node.js", "Express", "Tailwind CSS"],
+    category: "Motion & visuals",
+    items: ["Framer Motion", "Lucide", "Inter", "JetBrains Mono"],
   },
   {
-    category: "Discord",
-    items: ["Discord.js", "Discord API", "Lavalink", "Kazagumo", "Shoukaku"],
+    category: "Live presence",
+    items: ["Discord", "Lanyard", "WebSockets"],
   },
   {
-    category: "Tools",
-    items: ["Git", "GitHub", "VS Code", "Linux", "Termux", "Vercel", "Netlify"],
-  },
-  {
-    category: "Exploring",
-    items: ["AI", "Automation", "Cloud", "DevOps", "WebSockets", "APIs"],
-    isExploring: true,
+    category: "Deployment",
+    items: ["Netlify", "Node.js", "Git"],
   },
 ];
 
-export const STACK_BLUEPRINT = [
-  {
-    title: "LANGUAGES",
-    items: ["JavaScript", "TypeScript", "Python"],
-  },
-  {
-    title: "WEB",
-    items: ["React", "Next.js", "Node.js", "Express", "Tailwind"],
-  },
-  {
-    title: "INFRASTRUCTURE",
-    items: ["Linux", "Git", "Vercel", "Netlify"],
-  },
-  {
-    title: "DISCORD",
-    items: ["Discord.js", "Lavalink", "Kazagumo", "Shoukaku"],
-  },
-  {
-    title: "EXPLORING",
-    items: ["AI", "Cloud", "DevOps", "WebSockets", "Automation"],
-  },
-] as const;
+export const STACK_BLUEPRINT = SKILLS_DATA.map((group) => ({
+  title: group.category.toUpperCase(),
+  items: group.items,
+}));

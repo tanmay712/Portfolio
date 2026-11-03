@@ -7,27 +7,24 @@ export const FORTUNES: string[] = [
   "Good code, better tomorrow.",
 ];
 
-export const NEOFETCH_ASCII = `███████╗ █████╗ ███╗   ██╗ ██████╗ 
-██╔════╝██╔══██╗████╗  ██║██╔════╝ 
-█████╗  ███████║██╔██╗ ██║██║  ███╗
-██╔══╝  ██╔══██║██║╚██╗██║██║   ██║
-██║     ██║  ██║██║ ╚████║╚██████╔╝
-╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ `;
+export const NEOFETCH_ASCII = `██╗   ██╗ ██████╗ ██╗██████╗
+██║   ██║██╔═══██╗██║██╔══██╗
+██║   ██║██║   ██║██║██║  ██║
+╚██╗ ██╔╝██║   ██║██║██║  ██║
+ ╚████╔╝ ╚██████╔╝██║██████╔╝
+  ╚═══╝   ╚═════╝ ╚═╝╚═════╝`;
 
-export const CUSTOM_ASCII_BANNER = `┌────────────────────────────────────────────────────────┐
-│  ███████╗ █████╗ ███╗   ██╗ ██████╗ ██╗   ██╗██╗   ██╗ │
-│  ██╔════╝██╔══██╗████╗  ██║██╔════╝ ██║   ██║╚██╗ ██╔╝ │
-│  █████╗  ███████║██╔██╗ ██║██║  ███╗██║   ██║ ╚████╔╝  │
-│  ██╔══╝  ██╔══██║██║╚██╗██║██║   ██║██║   ██║  ╚██╔╝   │
-│  ██║     ██║  ██║██║ ╚████║╚██████╔╝╚██████╔╝   ██║    │
-│  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝    ╚═╝    │
-│                  P R O F I L E . O S                   │
-└────────────────────────────────────────────────────────┘`;
+export const CUSTOM_ASCII_BANNER = `┌──────────────────────────────────────┐
+│  ██╗   ██╗ ██████╗ ██╗██████╗        │
+│  ██║   ██║██╔═══██╗██║██╔══██╗       │
+│  ██║   ██║██║   ██║██║██║  ██║       │
+│  ╚██╗ ██╔╝██║   ██║██║██║  ██║       │
+│   ╚████╔╝ ╚██████╔╝██║██████╔╝       │
+│    ╚═══╝   ╚═════╝ ╚═╝╚═════╝        │
+│          P R O F I L E . O S         │
+│            @definescloud             │
+└──────────────────────────────────────┘`;
 
-export const SUDO_RESPONSE = `Nice try.
+export const SUDO_RESPONSE = `Nice try.\n\nThis portfolio runs on caffeine,\nnot root privileges.`;
 
-This portfolio runs on caffeine,
-not root privileges.`;
-
-export const FORTY_TWO_RESPONSE = `“The Answer to the Great Question of Life, the Universe, and Everything is 42.”
-— Deep Thought (verified on PROFILE.OS v6.9.0 in 0.002ms).`;
+export const FORTY_TWO_RESPONSE = `“The Answer to the Great Question of Life, the Universe, and Everything is 42.”\n— Deep Thought (verified on PROFILE.OS v6.9.0 in 0.002ms).`;

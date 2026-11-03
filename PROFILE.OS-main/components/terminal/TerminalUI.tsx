@@ -5,6 +5,7 @@ import { ChevronRight, Command, Maximize2, Minus, Terminal as TerminalIcon } fro
 import { getCommandSuggestions, resolveTabAutocomplete } from "@/lib/terminal/autocomplete";
 import { useTerminal } from "@/hooks/useTerminal";
 import { SITE_CONFIG } from "@/lib/constants";
+import { PROFILE_DATA } from "@/data/profile";
 
 interface TerminalUIProps {
   inputRef?: React.RefObject<HTMLInputElement | null>;
@@ -127,7 +128,7 @@ export function TerminalUI({ inputRef, onExecute, onFocus }: TerminalUIProps) {
         {logs.map((log) => (
           <div key={log.id} className="mb-4">
             <div className="flex items-start gap-2 text-zinc-300">
-              <span className="shrink-0 text-purple-400">fanguyss@portfolio:~$</span>
+              <span className="hidden shrink-0 text-purple-400 sm:inline">{PROFILE_DATA.prompt}</span>
               <span className="break-all">{log.rawInput}</span>
             </div>
             <div className="mt-1 overflow-x-auto pl-0 sm:pl-4">{log.output}</div>
@@ -135,7 +136,7 @@ export function TerminalUI({ inputRef, onExecute, onFocus }: TerminalUIProps) {
         ))}
 
         <div className="flex items-center gap-2 text-zinc-200">
-          <span className="shrink-0 text-purple-400">fanguyss@portfolio:~$</span>
+          <span className="hidden shrink-0 text-purple-400 sm:inline">{PROFILE_DATA.prompt}</span>
           <input
             ref={inputRef}
             value={input}

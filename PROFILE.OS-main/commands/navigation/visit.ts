@@ -5,6 +5,6 @@ export const visitCommand: CommandDefinition = {
   command: "visit",
   description: "Visit external profile or internal panel",
   category: "navigation",
-  usage: "visit <github|youtube|instagram|discord|email>",
+  usage: "visit <discord|email> or a configured public link",
   execute: (args, ctx) => openCommand.execute(args, ctx),
 };

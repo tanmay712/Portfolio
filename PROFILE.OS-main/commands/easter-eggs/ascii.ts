@@ -4,7 +4,7 @@ import { CUSTOM_ASCII_BANNER } from "@/data/easterEggs";
 
 export const asciiCommand: CommandDefinition = {
   command: "ascii",
-  description: "Render full FANGUYSS ASCII banner",
+  description: "Render void's ASCII banner",
   category: "easter-egg",
   execute: () => ({
     output: React.createElement(

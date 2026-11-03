@@ -1,56 +1,26 @@
 import React from "react";
 import { CommandDefinition } from "@/commands/types";
 import { SOCIAL_LINKS } from "@/data/socials";
+import { PROFILE_DATA } from "@/data/profile";
 
 export const projectsCommand: CommandDefinition = {
   command: "projects",
-  description: "View project philosophy and GitHub source of truth",
+  description: "Explore the project space",
   category: "core",
   execute: () => ({
-    panel: "github",
+    panel: "projects",
     output: React.createElement(
       "div",
-      {
-        className:
-          "font-mono text-xs sm:text-sm text-zinc-300 space-y-2 border border-zinc-800/90 bg-zinc-950/75 p-4 rounded-xl max-w-lg",
-      },
-      React.createElement(
-        "div",
-        { className: "text-cyan-400 font-semibold" },
-        "┌─ PROJECTS ───────────────────────────────────┐"
-      ),
-      React.createElement(
-        "div",
-        { className: "pl-2 space-y-2.5 py-1" },
-        React.createElement("p", { className: "text-zinc-200" }, "I could list every project here..."),
-        React.createElement(
-          "p",
-          { className: "text-zinc-400 leading-relaxed" },
-          "But everything worth exploring lives",
-          React.createElement("br"),
-          "where the code actually does."
-        ),
-        React.createElement(
-          "div",
-          { className: "pt-1 flex flex-wrap items-center gap-3" },
-          React.createElement(
-            "a",
-            {
-              href: SOCIAL_LINKS.github.url,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              className:
-                "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-purple-600/20 border border-purple-500/50 text-purple-300 hover:bg-purple-600/30 hover:text-white transition-colors text-xs font-semibold",
-            },
-            "→ github.com/FANGUYSS"
-          )
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: "text-cyan-400 font-semibold" },
-        "└──────────────────────────────────────────────┘"
-      )
+      { className: "max-w-lg space-y-3 rounded-xl border border-zinc-800/90 bg-zinc-950/75 p-4 font-mono text-xs sm:text-sm" },
+      React.createElement("div", { className: "font-semibold text-cyan-400" }, "PROJECTS // A WORK IN PROGRESS"),
+      React.createElement("p", { className: "leading-relaxed text-zinc-300" }, "Good things take shape one experiment at a time. Selected projects will live here when they're ready to share."),
+      React.createElement("p", { className: "text-zinc-500" }, "Have an idea worth building together? Let's talk."),
+      React.createElement("a", {
+        href: SOCIAL_LINKS.github?.url || `mailto:${PROFILE_DATA.email}`,
+        target: SOCIAL_LINKS.github ? "_blank" : undefined,
+        rel: SOCIAL_LINKS.github ? "noopener noreferrer" : undefined,
+        className: "inline-block text-cyan-400 underline underline-offset-4 hover:text-cyan-300",
+      }, SOCIAL_LINKS.github?.handle || PROFILE_DATA.email)
     ),
   }),
 };

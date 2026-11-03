@@ -1,39 +1,16 @@
 import React from "react";
 import { CommandDefinition } from "@/commands/types";
+import { STACK_BLUEPRINT } from "@/data/skills";
 
 export const stackCommand: CommandDefinition = {
   command: "stack",
-  description: "Render architectural stack blueprint",
+  description: "Show the technologies used to build this portfolio",
   category: "core",
   execute: () => ({
     output: React.createElement(
       "pre",
-      {
-        className:
-          "font-mono text-xs sm:text-sm text-zinc-300 overflow-x-auto leading-relaxed bg-zinc-950/75 border border-zinc-800/90 p-4 rounded-xl max-w-xl",
-      },
-      `┌─ STACK ──────────────────────────────────────┐
-
-LANGUAGES
-  JavaScript   TypeScript   Python
-
-WEB
-  React        Next.js      Node.js
-  Express      Tailwind
-
-INFRASTRUCTURE
-  Linux        Git          Vercel
-  Netlify
-
-DISCORD
-  Discord.js   Lavalink     Kazagumo
-  Shoukaku
-
-EXPLORING
-  AI           Cloud        DevOps
-  WebSockets   Automation
-
-└──────────────────────────────────────────────┘`
+      { className: "max-w-xl overflow-x-auto rounded-xl border border-zinc-800/90 bg-zinc-950/75 p-4 font-mono text-xs leading-relaxed text-zinc-300 sm:text-sm" },
+      `PROFILE.OS // BUILT WITH\n\n${STACK_BLUEPRINT.map((group) => `${group.title}\n  ${group.items.join(" · ")}`).join("\n\n")}`
     ),
   }),
 };

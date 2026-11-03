@@ -1,4 +1,4 @@
-const HISTORY_STORAGE_KEY = "profile_os_command_history_v690";
+const HISTORY_STORAGE_KEY = "void_os_command_history_v1";
 const MAX_HISTORY_LENGTH = 100;
 
 export function loadCommandHistory(): string[] {
