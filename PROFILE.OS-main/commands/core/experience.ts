@@ -4,7 +4,7 @@ import { PROFILE_DATA } from "@/data/profile";
 
 export const experienceCommand: CommandDefinition = {
   command: "experience",
-  description: "Show engineering focus and experience timeline",
+  description: "Show current focus and availability",
   category: "core",
   execute: () => ({
     output: React.createElement(
@@ -16,7 +16,7 @@ export const experienceCommand: CommandDefinition = {
       React.createElement(
         "div",
         { className: "text-cyan-400 font-semibold tracking-wider uppercase" },
-        `ENGINEERING EXPERIENCE // ${PROFILE_DATA.brand}`
+        `CURRENT FOCUS // ${PROFILE_DATA.brand}`
       ),
       React.createElement(
         "div",

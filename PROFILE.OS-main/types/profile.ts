@@ -15,6 +15,7 @@ export interface ProfileData {
   prompt: string;
   lanyardId: string;
   email: string;
+  avatar: string;
   headline: string;
   subheadline: string;
   bio: string;

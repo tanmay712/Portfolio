@@ -5,7 +5,7 @@ import { PROFILE_DATA } from "@/data/profile";
 
 export const skillsCommand: CommandDefinition = {
   command: "skills",
-  description: "Display categorized technology stack and capabilities",
+  description: "Show the technologies powering this portfolio",
   category: "core",
   execute: () => ({
     panel: "skills",
@@ -18,7 +18,7 @@ export const skillsCommand: CommandDefinition = {
       React.createElement(
         "div",
         { className: "text-cyan-400 font-semibold tracking-wider uppercase" },
-        `SKILLS MATRIX // ${PROFILE_DATA.brand}`
+        `BUILT WITH // ${PROFILE_DATA.brand}`
       ),
       React.createElement(
         "div",

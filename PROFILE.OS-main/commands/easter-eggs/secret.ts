@@ -12,7 +12,7 @@ export const secretCommand: CommandDefinition = {
       React.createElement(
         "div",
         { className: "text-purple-400 font-semibold" },
-        "[CLASSIFIED SECTOR // FANGUYSS.ME]"
+        "[CLASSIFIED SECTOR // DEFINESCLOUD.SITE]"
       ),
       React.createElement(
         "div",

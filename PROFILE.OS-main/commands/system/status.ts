@@ -1,5 +1,6 @@
 import React from "react";
 import { CommandDefinition } from "@/commands/types";
+import { SOCIAL_LINKS } from "@/data/socials";
 
 export const statusCommand: CommandDefinition = {
   command: "status",
@@ -30,7 +31,7 @@ export const statusCommand: CommandDefinition = {
           ctx.music.error ? "DEGRADED" : "READY",
           ctx.music.error ? "text-amber-400" : "text-emerald-400",
         ],
-        ["GitHub", "AVAILABLE", "text-cyan-400"],
+        ["GitHub", SOCIAL_LINKS.github ? "LINKED" : "NOT CONFIGURED", SOCIAL_LINKS.github ? "text-cyan-400" : "text-zinc-500"],
       ].map(([label, state, colorClass]) =>
         React.createElement(
           "div",

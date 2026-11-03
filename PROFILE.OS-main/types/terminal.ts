@@ -43,7 +43,7 @@ export interface CommandExecutionContext {
 
 export interface CommandResult {
   output?: ReactNode | string;
-  panel?: "about" | "skills" | "github" | "discord" | "music" | "socials" | "home" | null;
+  panel?: "about" | "skills" | "projects" | "github" | "discord" | "music" | "socials" | "home" | null;
 }
 
 export interface CommandDefinition {

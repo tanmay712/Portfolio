@@ -4,7 +4,7 @@ import { PROFILE_DATA } from "@/data/profile";
 
 export const aboutCommand: CommandDefinition = {
   command: "about",
-  description: "Display identity, bio, and engineering philosophy",
+  description: "Display identity and introduction",
   category: "core",
   execute: () => ({
     panel: "about",
@@ -53,13 +53,13 @@ export const aboutCommand: CommandDefinition = {
             "div",
             null,
             React.createElement("span", { className: "text-zinc-500 block" }, "FOCUS"),
-            React.createElement("span", { className: "text-cyan-400 font-medium" }, "Web • Bots • Automation")
+            React.createElement("span", { className: "text-cyan-400 font-medium" }, "Ideas • Experiments")
           ),
           React.createElement(
             "div",
             null,
             React.createElement("span", { className: "text-zinc-500 block" }, "CONTACT"),
-            React.createElement("span", { className: "text-zinc-200 font-medium" }, PROFILE_DATA.email)
+            React.createElement("a", { href: `mailto:${PROFILE_DATA.email}`, className: "break-all text-cyan-300 hover:underline" }, PROFILE_DATA.email)
           )
         )
       ),

@@ -1,39 +1,34 @@
+import { SITE_CONFIG } from "@/lib/constants";
+
 export interface SocialLink {
-  id: "github" | "youtube" | "instagram" | "email" | "discord";
+  id: "github" | "email" | "discord";
   label: string;
   handle: string;
   url: string;
 }
 
+/** Only supplied, public contact channels are included by default. */
 export const SOCIAL_LINKS: Record<string, SocialLink> = {
-  github: {
-    id: "github",
-    label: "GitHub",
-    handle: "github.com/FANGUYSS",
-    url: "https://github.com/FANGUYSS",
-  },
-  youtube: {
-    id: "youtube",
-    label: "YouTube",
-    handle: "youtube.com/@fanguysss",
-    url: "https://youtube.com/@fanguysss",
-  },
-  instagram: {
-    id: "instagram",
-    label: "Instagram",
-    handle: "instagram.com/fanguyss",
-    url: "https://www.instagram.com/fanguyss",
-  },
-  email: {
-    id: "email",
-    label: "Email",
-    handle: "fanguyss523@gmail.com",
-    url: "mailto:fanguyss523@gmail.com",
-  },
   discord: {
     id: "discord",
     label: "Discord",
-    handle: "FANGUYSS",
-    url: "https://discord.com/users/1237229822371958908",
+    handle: `@${SITE_CONFIG.username}`,
+    url: `https://discord.com/users/${SITE_CONFIG.lanyardId}`,
   },
+  email: {
+    id: "email",
+    label: "Support email",
+    handle: SITE_CONFIG.email,
+    url: `mailto:${SITE_CONFIG.email}`,
+  },
+  ...(SITE_CONFIG.githubUsername
+    ? {
+        github: {
+          id: "github" as const,
+          label: "GitHub",
+          handle: `github.com/${SITE_CONFIG.githubUsername}`,
+          url: `https://github.com/${SITE_CONFIG.githubUsername}`,
+        },
+      }
+    : {}),
 };

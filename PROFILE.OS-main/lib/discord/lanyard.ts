@@ -1,8 +1,7 @@
 import { SITE_CONFIG } from "@/lib/constants";
 import { LanyardApiResponse, LanyardData } from "@/types/discord";
 
-const LANYARD_REST_BASE =
-  process.env.NEXT_PUBLIC_LANYARD_API_URL || "https://api.lanyard.rest/v1/users";
+const LANYARD_REST_BASE = SITE_CONFIG.lanyardApiUrl;
 
 /**
  * Fetches current Discord presence snapshot from Lanyard REST API.
@@ -14,6 +13,7 @@ export async function fetchLanyardPresence(
     const response = await fetch(`${LANYARD_REST_BASE}/${userId}`, {
       method: "GET",
       cache: "no-store",
+      signal: AbortSignal.timeout(8000),
     });
 
     if (!response.ok) {

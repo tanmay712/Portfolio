@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import { parseCommandInput } from "@/commands/parser";
 import { getCommandDefinition } from "@/commands/registry";
 import { useTheme } from "./ThemeContext";
@@ -8,6 +8,7 @@ import { useDiscord } from "./DiscordContext";
 import { useMusic } from "./MusicContext";
 import { TerminalLogEntry } from "@/types/terminal";
 import { loadCommandHistory, appendCommandToHistory } from "@/lib/terminal/history";
+import { PROFILE_DATA } from "@/data/profile";
 
 interface TerminalContextValue {
   logs: TerminalLogEntry[];
@@ -16,6 +17,7 @@ interface TerminalContextValue {
   matrixActive: boolean;
   executeCommand: (rawInput: string) => void;
   clearTerminal: () => void;
+  closePanel: () => void;
 }
 
 const TerminalContext = createContext<TerminalContextValue | undefined>(undefined);
@@ -31,6 +33,7 @@ export function TerminalProvider({ children }: { children: React.ReactNode }) {
   const music = useMusic();
 
   const clearTerminal = useCallback(() => setLogs([]), []);
+  const closePanel = useCallback(() => setActivePanel(null), []);
 
   const triggerMatrix = useCallback(() => {
     setMatrixActive(true);
@@ -45,7 +48,7 @@ export function TerminalProvider({ children }: { children: React.ReactNode }) {
       const updatedHistory = appendCommandToHistory(history, parsed.normalizedInput);
       setHistory(updatedHistory);
 
-      // Strictly block "social" and direct user to "socials" per Section 9
+      // Keep the plural command as the canonical contact-channel command.
       if (parsed.commandName === "social") {
         setLogs((prev) => [
           ...prev,
@@ -75,7 +78,7 @@ export function TerminalProvider({ children }: { children: React.ReactNode }) {
             output: React.createElement(
               "span",
               { className: "text-rose-400 text-xs font-mono" },
-              `fanguyss-shell: command not found: ${parsed.commandName}. Type help for available commands.`
+              `${PROFILE_DATA.shell}: command not found: ${parsed.commandName}. Type help for available commands.`
             ),
           },
         ]);
@@ -140,6 +143,7 @@ export function TerminalProvider({ children }: { children: React.ReactNode }) {
         matrixActive,
         executeCommand,
         clearTerminal,
+        closePanel,
       }}
     >
       {children}
