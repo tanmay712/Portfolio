@@ -9,9 +9,9 @@ export interface CommandMetadataItem {
 
 export const COMMAND_METADATA: CommandMetadataItem[] = [
   // Core Portfolio Commands
-  { command: "help", description: "Show all available PROFILE.OS commands", category: "core" },
+  { command: "help", description: "Show all available Holds indra commands", category: "core" },
   { command: "clear", description: "Clear the terminal output buffer", category: "core" },
-  { command: "home", description: "Return to the main PROFILE.OS workspace", category: "core" },
+  { command: "home", description: "Return to the main Holds indra workspace", category: "core" },
   { command: "about", description: "Display identity and introduction", category: "core" },
   { command: "whoami", description: "Print effective user and workstation identity", category: "core" },
   { command: "projects", description: "Explore the project space", category: "core" },
@@ -45,7 +45,7 @@ export const COMMAND_METADATA: CommandMetadataItem[] = [
   { command: "previous", description: "Return to the previous track", category: "media" },
 
   // Easter Eggs
-  { command: "theme", description: "Inspect or switch subtle PROFILE.OS visual themes", category: "easter-egg", usage: "theme [midnight|purple|cyan|terminal]" },
+  { command: "theme", description: "Inspect or switch subtle Holds indra visual themes", category: "easter-egg", usage: "theme [midnight|purple|cyan|terminal]" },
   { command: "matrix", description: "Trigger temporary digital rain visual effect", category: "easter-egg" },
   { command: "coffee", description: "Brew 3am developer fuel", category: "easter-egg" },
   { command: "fortune", description: "Print a random engineering aphorism", category: "easter-egg" },

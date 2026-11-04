@@ -1,31 +1,15 @@
-import { SITE_CONFIG } from "@/lib/constants";
 import { LanyardApiResponse, LanyardData } from "@/types/discord";
 
-const LANYARD_REST_BASE = SITE_CONFIG.lanyardApiUrl;
-
-/**
- * Fetches current Discord presence snapshot from Lanyard REST API.
- */
-export async function fetchLanyardPresence(
-  userId: string = SITE_CONFIG.lanyardId
-): Promise<LanyardData | null> {
+/** Fetch through our server so custom endpoint credentials never reach the browser. */
+export async function fetchLanyardPresence(): Promise<LanyardData | null> {
   try {
-    const response = await fetch(`${LANYARD_REST_BASE}/${userId}`, {
-      method: "GET",
+    const response = await fetch("/api/discord", {
       cache: "no-store",
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(10000),
     });
-
-    if (!response.ok) {
-      return null;
-    }
-
+    if (!response.ok) return null;
     const json = (await response.json()) as LanyardApiResponse;
-    if (!json.success || !json.data) {
-      return null;
-    }
-
-    return json.data;
+    return json.success && json.data ? json.data : null;
   } catch {
     return null;
   }

@@ -12,7 +12,7 @@ export default function ErrorBoundary({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("PROFILE.OS Runtime Exception:", error);
+    console.error("Holds indra Runtime Exception:", error);
   }, [error]);
 
   return (

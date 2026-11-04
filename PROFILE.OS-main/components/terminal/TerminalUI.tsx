@@ -90,7 +90,7 @@ export function TerminalUI({ inputRef, onExecute, onFocus }: TerminalUIProps) {
 
   return (
     <section
-      aria-label="PROFILE.OS terminal"
+      aria-label="Holds indra terminal"
       className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#07080d]/90 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl"
       onClick={onFocus}
     >
@@ -102,7 +102,7 @@ export function TerminalUI({ inputRef, onExecute, onFocus }: TerminalUIProps) {
             <TerminalIcon className="h-3.5 w-3.5 text-cyan-300" />
           </span>
           <div className="flex items-center gap-2 font-mono text-[11px]">
-            <span className="text-zinc-200">PROFILE.OS</span>
+            <span className="text-zinc-200">Holds indra</span>
             <span className="text-zinc-600">/</span>
             <span className="text-zinc-500">terminal</span>
           </div>

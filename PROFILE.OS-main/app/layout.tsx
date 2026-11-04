@@ -9,7 +9,7 @@ import { MusicProvider } from "@/context/MusicContext";
 import { TerminalProvider } from "@/context/TerminalContext";
 import { SITE_CONFIG } from "@/lib/constants";
 
-const title = "void (@definescloud) — PROFILE.OS";
+const title = "void (@definescloud) — Holds indra";
 const description =
   "The personal space of void, also known as definescloud. Ideas, experiments, and what's next. Get in touch at void@definescloud.site.";
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.siteUrl),
   title,
   description,
-  applicationName: "void — PROFILE.OS",
+  applicationName: "void — Holds indra",
   authors: [{ name: SITE_CONFIG.brand, url: SITE_CONFIG.siteUrl }],
   alternates: { canonical: "/" },
   icons: { icon: SITE_CONFIG.avatar, apple: SITE_CONFIG.avatar },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: "/",
-    siteName: "void — PROFILE.OS",
+    siteName: "void — Holds indra",
     type: "website",
     locale: "en_US",
     images: [{ url: SITE_CONFIG.avatar, width: 512, height: 512, alt: "void's avatar" }],

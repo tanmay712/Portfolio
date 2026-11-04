@@ -14,7 +14,7 @@ export const INITIAL_DISCORD_PRESENCE: DiscordPresenceState = {
 };
 
 /**
- * Transforms raw Lanyard payload into normalized PROFILE.OS DiscordPresenceState.
+ * Transforms raw Lanyard payload into normalized Holds indra DiscordPresenceState.
  */
 export function normalizeLanyardPresence(data: LanyardData | null): DiscordPresenceState {
   if (!data) {

@@ -10,7 +10,7 @@ export const stackCommand: CommandDefinition = {
     output: React.createElement(
       "pre",
       { className: "max-w-xl overflow-x-auto rounded-xl border border-zinc-800/90 bg-zinc-950/75 p-4 font-mono text-xs leading-relaxed text-zinc-300 sm:text-sm" },
-      `PROFILE.OS // BUILT WITH\n\n${STACK_BLUEPRINT.map((group) => `${group.title}\n  ${group.items.join(" · ")}`).join("\n\n")}`
+      `Holds indra // BUILT WITH\n\n${STACK_BLUEPRINT.map((group) => `${group.title}\n  ${group.items.join(" · ")}`).join("\n\n")}`
     ),
   }),
 };

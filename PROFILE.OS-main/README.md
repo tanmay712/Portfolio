@@ -1,4 +1,4 @@
-# void (@definescloud) — PROFILE.OS
+# void (@definescloud) — Holds indra
 
 A cinematic, command-driven personal portfolio built with Next.js, TypeScript, React, Tailwind CSS, Framer Motion, Lanyard, and the browser Audio API.
 
@@ -33,21 +33,12 @@ npm run build
 npm start -- --hostname 0.0.0.0
 ```
 
-## Netlify
+## Deploy on Vercel
 
-Use the **repository root's `netlify.toml`** when importing the repository. It configures:
+Import this repository into Vercel and set **Root Directory** to **`PROFILE.OS-main`**.
+The app's `vercel.json` selects Next.js, `npm ci`, `npm run build`, and `.next` output. Choose **Node.js 22.x** in Vercel project settings. Do not use static export: Discord and GitHub require server routes.
 
-- Base directory: `PROFILE.OS-main`
-- Build command: `npm run build`
-- Publish directory: `.next` (processed by the Next.js Runtime)
-- Node.js: 22
-- Next.js Runtime: `@netlify/plugin-nextjs`, installed from this package's lockfile
-
-Do not select static export or set the publish directory to `out`; the Discord and optional GitHub API routes require the Next.js runtime. Do not install a second Next.js Runtime plugin in the Netlify UI.
-
-Set `NEXT_PUBLIC_SITE_URL` to the actual deployment URL for canonical and social-preview metadata. If using a temporary `*.netlify.app` URL, use that URL until the custom domain is ready. Public `NEXT_PUBLIC_*` values are embedded at build time, so redeploy after changing them.
-
-If configuring a site manually instead of importing the repository root, use `PROFILE.OS-main` as the package/base directory and replicate the root TOML settings relative to that directory.
+Set `NEXT_PUBLIC_SITE_URL` to your actual deployment URL. The default `https://definescloud.site` is inferred from the support email. Add variables from the app's `.env.example` in Vercel project settings, then redeploy. Never commit secret keys. The Netlify configuration and runtime dependency have been removed.
 
 ### Environment variables
 
@@ -59,7 +50,11 @@ GitHub links are hidden until `NEXT_PUBLIC_GITHUB_USERNAME` is set to a real acc
 
 The configured user ID is `337964487241891840`. Lanyard must be monitoring this account for live status, custom status, activities, or Spotify information to appear. If the user is not monitored or the service cannot be reached, the site shows a standby state and the local avatar instead of failing. See [Lanyard's setup documentation](https://github.com/Phineas/lanyard).
 
-Presence uses Lanyard's REST endpoint for the initial snapshot and its WebSocket for updates. The server snapshot is also available at `/api/discord`. The displayed Discord profile link always uses the configured user ID.
+Presence polls `/api/discord` every 15 seconds through a server-side proxy. No browser request goes directly to the upstream endpoint, and no public WebSocket can overwrite custom API data.
+
+Set `LANYARD_API_URL` to a users base URL, a complete user URL, or a URL containing `{userId}`. Existing `NEXT_PUBLIC_LANYARD_API_URL` settings are supported as a legacy fallback; prefer the server-only setting. The upstream must return the standard Lanyard `{ success: true, data: ... }` shape.
+
+Public Lanyard presence needs **no API key**. For a protected custom endpoint, set server-only `LANYARD_API_KEY`. Defaults are `LANYARD_API_KEY_HEADER=Authorization` and `LANYARD_API_KEY_PREFIX=Bearer`. For `x-api-key: <key>`, set the header to `x-api-key` and the prefix to an empty value. For raw Authorization, leave the prefix empty. Follow your provider's requirements; never use `NEXT_PUBLIC_*` for credentials. Errors never return upstream messages or keys. Authenticated custom WebSockets are not used. The Discord link always uses your configured user ID.
 
 ## Replace the avatar
 

@@ -22,7 +22,7 @@ export function Hero({ onCommand }: HeroProps) {
 
       <div className="relative overflow-hidden rounded-[28px] border border-white/[0.07] bg-[#08090f]/75 p-6 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-10">
         <div className="mb-8 flex items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-          <span>PROFILE.OS <span className="text-cyan-400/70">{"//"} {SITE_CONFIG.username}</span></span>
+          <span>Holds indra <span className="text-cyan-400/70">{"//"} {SITE_CONFIG.username}</span></span>
           <span className="flex shrink-0 items-center gap-2">
             <Circle className={`h-2 w-2 fill-current ${discord.connected ? "text-emerald-400" : "text-zinc-600"}`} />
             {discord.connected ? "live" : "standby"}

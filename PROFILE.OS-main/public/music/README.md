@@ -1,4 +1,4 @@
-# PROFILE.OS local music
+# Holds indra local music
 
 The inherited files are template listening samples, not music authored by void.
 Replace them with your own or appropriately licensed audio before publishing:

@@ -16,13 +16,13 @@ export default function ProfileOSPage() {
           <main className="flex flex-col gap-4" id="main-content">
             <Home />
             <Panels />
-            <section className="grid grid-cols-1 gap-4 xl:grid-cols-2" aria-label="Live PROFILE.OS modules">
+            <section className="grid grid-cols-1 gap-4 xl:grid-cols-2" aria-label="Live Holds indra modules">
               <DiscordCard />
               <MusicPlayer />
             </section>
           </main>
           <footer className="mt-auto flex flex-col gap-3 border-t border-white/[0.05] px-1 pt-4 font-mono text-[10px] tracking-[0.1em] text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
-            <span>© {new Date().getFullYear()} {SITE_CONFIG.brand} <span className="text-zinc-600">{"//"} PROFILE.OS v{SITE_CONFIG.version}</span></span>
+            <span>© {new Date().getFullYear()} {SITE_CONFIG.brand} <span className="text-zinc-600">{"//"} Holds indra v{SITE_CONFIG.version}</span></span>
             <a href={`mailto:${SITE_CONFIG.email}`} className="break-all transition hover:text-cyan-300">{SITE_CONFIG.email}</a>
           </footer>
         </div>

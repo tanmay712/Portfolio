@@ -15,13 +15,11 @@ function getSiteUrl(): string {
 export const SITE_CONFIG = {
   brand: "void",
   username: "definescloud",
-  name: "PROFILE.OS",
+  name: "Holds indra",
   version: "6.9.0",
   siteUrl: getSiteUrl(),
   domain: new URL(getSiteUrl()).host,
   lanyardId: process.env.NEXT_PUBLIC_LANYARD_USER_ID || "337964487241891840",
-  lanyardApiUrl:
-    process.env.NEXT_PUBLIC_LANYARD_API_URL || "https://api.lanyard.rest/v1/users",
   email: "void@definescloud.site",
   avatar: "/avatar.png",
   // No GitHub account was supplied; do not link to the template owner's account.

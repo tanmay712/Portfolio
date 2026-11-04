@@ -20,7 +20,7 @@ export const SKILLS_DATA: SkillGroup[] = [
   },
   {
     category: "Deployment",
-    items: ["Netlify", "Node.js", "Git"],
+    items: ["Vercel", "Node.js", "Git"],
   },
 ];
 

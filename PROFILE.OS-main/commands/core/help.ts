@@ -4,7 +4,7 @@ import { PROFILE_DATA } from "@/data/profile";
 
 export const helpCommand: CommandDefinition = {
   command: "help",
-  description: "Display available PROFILE.OS commands",
+  description: "Display available Holds indra commands",
   category: "core",
   execute: () => ({
     output: React.createElement(

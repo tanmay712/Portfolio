@@ -1,4 +1,4 @@
-# void — PROFILE.OS
+# void — Holds indra
 
 A personalized, interactive portfolio for **void** (`@definescloud`).
 
@@ -7,13 +7,13 @@ A personalized, interactive portfolio for **void** (`@definescloud`).
 - Application: [`PROFILE.OS-main/`](PROFILE.OS-main/)
 - Replaceable avatar: [`PROFILE.OS-main/public/avatar.png`](PROFILE.OS-main/public/avatar.png)
 
-## Deploy on Netlify
+## Deploy on Vercel
 
-Import this repository into Netlify. The root [`netlify.toml`](netlify.toml) sets the application base directory, Node.js 22, the production build command, and the Next.js Runtime. The publish directory is intentionally `.next`, **not** `out`: the portfolio includes Next.js API routes.
+Import this repository into Vercel and set **Root Directory** to **`PROFILE.OS-main`**.
+The app's `vercel.json` selects Next.js, `npm ci`, `npm run build`, and `.next` output. Choose **Node.js 22.x** in Vercel project settings. Do not use static export: Discord and GitHub require server routes.
 
-Set `NEXT_PUBLIC_SITE_URL` in Netlify's environment variables to the actual site URL. The default, `https://definescloud.site`, is inferred from the supplied support-email domain. Redeploy after changing public environment variables. See [`PROFILE.OS-main/.env.example`](PROFILE.OS-main/.env.example) for the other optional settings.
+Set `NEXT_PUBLIC_SITE_URL` to your actual deployment URL. The default `https://definescloud.site` is inferred from the support email. Add variables from the app's `.env.example` in Vercel project settings, then redeploy. Never commit secret keys. The Netlify configuration and runtime dependency have been removed.
 
-The Next.js Runtime is already included in the app's dependencies and configured in `netlify.toml`; do not add a second copy through the Netlify UI.
 
 ## Run locally
 

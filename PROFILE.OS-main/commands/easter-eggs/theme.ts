@@ -4,7 +4,7 @@ import { ThemeMode } from "@/context/ThemeContext";
 
 export const themeCommand: CommandDefinition = {
   command: "theme",
-  description: "Inspect or switch subtle PROFILE.OS visual themes",
+  description: "Inspect or switch subtle Holds indra visual themes",
   category: "easter-egg",
   usage: "theme [midnight|purple|cyan|terminal]",
   execute: (args, ctx) => {
@@ -17,7 +17,7 @@ export const themeCommand: CommandDefinition = {
         output: React.createElement(
           "div",
           { className: "font-mono text-xs text-cyan-400" },
-          "PROFILE.OS visual profile updated to ",
+          "Holds indra visual profile updated to ",
           React.createElement("strong", { className: "uppercase" }, requested),
           "."
         ),
