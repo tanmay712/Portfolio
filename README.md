@@ -1,38 +1,92 @@
-# void — PROFILE.OS
+# void (@definescloud) — Holds indra
 
-A personalized, interactive portfolio for **void** (`@definescloud`).
+A cinematic, command-driven personal portfolio built with Next.js, TypeScript, React, Tailwind CSS, Framer Motion, Lanyard, and the browser Audio API.
 
-- Discord user ID: `337964487241891840`
-- Support: [void@definescloud.site](mailto:void@definescloud.site)
-- Application: [`PROFILE.OS-main/`](PROFILE.OS-main/)
-- Replaceable avatar: [`PROFILE.OS-main/public/avatar.png`](PROFILE.OS-main/public/avatar.png)
+## Identity
 
-## Deploy on Netlify
+- **Name:** void
+- **Username:** definescloud
+- **Discord user ID:** 337964487241891840
+- **Support email:** [void@definescloud.site](mailto:void@definescloud.site)
+- **Default site URL:** https://definescloud.site (configurable; inferred from the support-email domain)
 
-Import this repository into Netlify. The root [`netlify.toml`](netlify.toml) sets the application base directory, Node.js 22, the production build command, and the Next.js Runtime. The publish directory is intentionally `.next`, **not** `out`: the portfolio includes Next.js API routes.
+Public identity defaults are centralized in `lib/constants.ts`. The introduction and current-focus notes are in `data/profile.ts`; public contact links are in `data/socials.ts`. No unrelated social accounts or employment claims are included.
 
-Set `NEXT_PUBLIC_SITE_URL` in Netlify's environment variables to the actual site URL. The default, `https://definescloud.site`, is inferred from the supplied support-email domain. Redeploy after changing public environment variables. See [`PROFILE.OS-main/.env.example`](PROFILE.OS-main/.env.example) for the other optional settings.
+## Repository layout
 
-The Next.js Runtime is already included in the app's dependencies and configured in `netlify.toml`; do not add a second copy through the Netlify UI.
+The Next.js application now lives directly in the repository root. `package.json`, `vercel.json`, `app/`, and `public/` are all at the top level; there is no nested application directory. For an existing Vercel project, remove the old `PROFILE.OS-main` Root Directory setting and select the repository root before redeploying.
 
 ## Run locally
 
+Requires Node.js 22 or newer.
+
 ```bash
-cd PROFILE.OS-main
 npm ci
+cp .env.example .env.local  # Optional; sensible public defaults are already set.
 npm run dev -- --hostname 0.0.0.0
 ```
 
-Open http://localhost:3000. For production checks, run `npm run typecheck`, `npm run lint`, and `npm run build`.
+Open http://localhost:3000. Fonts are bundled locally through Fontsource; the build does not fetch Google Fonts.
 
-## Make it yours
+## Checks and production
 
-Replace `PROFILE.OS-main/public/avatar.png` with your own PNG, keeping the filename. A square image, at least 512 × 512 pixels, works well. The same file is used for the hero, Discord card fallback, browser icon, and social preview. Redeploy after replacing it.
+```bash
+npm run typecheck
+npm run lint
+npm run build
+npm start -- --hostname 0.0.0.0
+```
 
-Edit `data/profile.ts` for the introduction and current-focus notes. Public identity and contact defaults live in `lib/constants.ts`. No GitHub, YouTube, or Instagram account was assumed; set `NEXT_PUBLIC_GITHUB_USERNAME` to enable an optional GitHub link.
+## Deploy on Vercel
 
-Live Discord activity requires Lanyard to monitor the configured user. The portfolio remains usable and displays the local avatar when presence is unavailable. The skills panel lists technologies used by this portfolio, not unverified personal qualifications. Project content is intentionally left ready for real work rather than fabricated projects.
+Import this repository into Vercel and set **Root Directory** to **`.` (the repository root)**.
+The root `vercel.json` selects Next.js, `npm ci`, `npm run build`, and `.next` output. Choose **Node.js 22.x** in Vercel project settings. Do not use static export: Discord and GitHub require server routes.
 
-The inherited music files are local listening samples, not music authored by void. Replace them with your own or appropriately licensed selections before publishing. See the app README for details.
+Set `NEXT_PUBLIC_SITE_URL` to your actual deployment URL. The default `https://definescloud.site` is inferred from the support email. Add variables from the app's `.env.example` in Vercel project settings, then redeploy. Never commit secret keys. The Netlify configuration and runtime dependency have been removed.
 
-Original template copyright and MIT license notices are retained in `PROFILE.OS-main/LICENSE`.
+### Environment variables
+
+See `.env.example`. Only public values use the `NEXT_PUBLIC_` prefix. `GITHUB_TOKEN` is optional and stays server-side. Never commit `.env.local` or real secrets.
+
+GitHub links are hidden until `NEXT_PUBLIC_GITHUB_USERNAME` is set to a real account. `/api/github` returns `available: false` without making a request when unconfigured. Setting a username enables the public link and API; the API fetches public profile information and the six most recently updated repositories.
+
+### Discord presence
+
+The configured user ID is `337964487241891840`. Lanyard must be monitoring this account for live status, custom status, activities, or Spotify information to appear. If the user is not monitored or the service cannot be reached, the site shows a standby state and the local avatar instead of failing. See [Lanyard's setup documentation](https://github.com/Phineas/lanyard).
+
+Presence polls `/api/discord` every 15 seconds through a server-side proxy. No browser request goes directly to the upstream endpoint, and no public WebSocket can overwrite custom API data.
+
+Set `LANYARD_API_URL` to a users base URL, a complete user URL, or a URL containing `{userId}`. Existing `NEXT_PUBLIC_LANYARD_API_URL` settings are supported as a legacy fallback; prefer the server-only setting. The upstream must return the standard Lanyard `{ success: true, data: ... }` shape.
+
+Public Lanyard presence needs **no API key**. For a protected custom endpoint, set server-only `LANYARD_API_KEY`. Defaults are `LANYARD_API_KEY_HEADER=Authorization` and `LANYARD_API_KEY_PREFIX=Bearer`. For `x-api-key: <key>`, set the header to `x-api-key` and the prefix to an empty value. For raw Authorization, leave the prefix empty. Follow your provider's requirements; never use `NEXT_PUBLIC_*` for credentials. Errors never return upstream messages or keys. Authenticated custom WebSockets are not used. The Discord link always uses your configured user ID.
+
+## Replace the avatar
+
+The single canonical file is **`public/avatar.png`**, served at **`/avatar.png`**. Replace it with your own PNG, keeping the same filename. Use a square image, at least 512 × 512 pixels. It is used by:
+
+- Hero portrait
+- Discord card (including the offline/unavailable state)
+- Browser and Apple touch icons
+- Open Graph and Twitter preview images
+
+Rebuild/redeploy after replacing the image. Social platforms may cache the old preview; refresh it with their sharing debuggers if needed.
+
+## Projects, skills, and focus
+
+The projects panel is intentionally honest about work not yet published. Add real projects when ready. `skills` and `stack` describe the technologies used by this site, not a claim about void's personal expertise. `experience` shows current-focus notes rather than invented employment history. Edit these sources as your portfolio grows.
+
+## Local music
+
+The template's audio files remain in `public/music/`, with artwork in `public/music/artwork/`. They are listening samples, **not tracks authored by void**. Replace them with your own or appropriately licensed tracks and update `data/music.ts` with accurate titles, artists, album names, paths, and durations. The player only starts after user interaction and does not require Spotify.
+
+Controls include play/pause, previous/next, shuffle, repeat, seeking, and volume. See `public/music/README.md`.
+
+## Terminal commands
+
+`help` `about` `whoami` `projects` `skills` `stack` `experience` `contact` `socials` `discord` `github` `status` `neofetch` `history` `date` `pwd` `ls` `open` `visit` `music` `nowplaying` `play` `pause` `resume` `next` `previous` `theme` `matrix` `coffee` `fortune` `ascii` `secret` `sudo` `konami` `42`
+
+Commands are case-insensitive and support aliases, TAB autocomplete, and session history. Try `whoami`, `contact`, or `open discord`. The interface supports mobile layouts and reduced-motion preferences.
+
+## License
+
+The original MIT license and copyright notice are retained in `LICENSE`.
