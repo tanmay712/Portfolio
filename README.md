@@ -14,7 +14,7 @@ Public identity defaults are centralized in `lib/constants.ts`. The introduction
 
 ## Repository layout
 
-The Next.js application now lives directly in the repository root. `package.json`, `vercel.json`, `app/`, and `public/` are all at the top level; there is no nested application directory. For an existing Vercel project, remove the old `PROFILE.OS-main` Root Directory setting and select the repository root before redeploying.
+The Next.js application now lives directly in the repository root. `package.json`, `netlify.toml`, `app/`, and `public/` are all at the top level; there is no nested application directory. For an existing Netlify project, clear any old `PROFILE.OS-main` base/package directory setting and use the repository root.
 
 ## Run locally
 
@@ -37,12 +37,13 @@ npm run build
 npm start -- --hostname 0.0.0.0
 ```
 
-## Deploy on Vercel
+## Deploy on Netlify
 
-Import this repository into Vercel and set **Root Directory** to **`.` (the repository root)**.
-The root `vercel.json` selects Next.js, `npm ci`, `npm run build`, and `.next` output. Choose **Node.js 22.x** in Vercel project settings. Do not use static export: Discord and GitHub require server routes.
+Import this repository into Netlify with the repository root as the base directory (leave the Base directory and Package directory overrides empty). The root `netlify.toml` sets `npm run build`, `.next` output, Node.js 22, and the lockfile-installed `@netlify/plugin-nextjs` runtime.
 
-Set `NEXT_PUBLIC_SITE_URL` to your actual deployment URL. The default `https://definescloud.site` is inferred from the support email. Add variables from the app's `.env.example` in Vercel project settings, then redeploy. Never commit secret keys. The Netlify configuration and runtime dependency have been removed.
+Do not use static export or publish `out`: Discord and GitHub API routes need the Next.js runtime. Do not add a second Next.js runtime plugin in the Netlify UI. Clear any old nested `PROFILE.OS-main` build settings before deploying.
+
+Set `NEXT_PUBLIC_SITE_URL` to your actual deployment URL. The default `https://definescloud.site` is inferred from the support email. Add variables from `.env.example` in Netlify project settings, including optional server-only Lanyard authentication settings, then redeploy. Never commit secret keys.
 
 ### Environment variables
 
